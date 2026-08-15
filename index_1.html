@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D Art Studio — Drawing, Craft & Painting</title>
+<meta name="description" content="D Art Studio — original drawings, handmade craft, and paintings.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper: #EFEBE1;
+    --paper-dim: #E4DECE;
+    --ink: #2B2620;
+    --ink-soft: #5B5650;
+    --charcoal: #4A463F;
+    --clay: #A6491F;
+    --ultramarine: #2C4A7C;
+    --gold: #C9A227;
+    --line: rgba(43,38,32,0.18);
+    --radius: 2px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--paper);
+    background-image:
+      radial-gradient(rgba(43,38,32,0.035) 1px, transparent 1px);
+    background-size: 3px 3px;
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .hand{
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+  }
+
+  a{ color: inherit; }
+
+  :focus-visible{
+    outline: 2px solid var(--clay);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(239,235,225,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 0;
+  }
+  .logo{
+    font-size: 1.5rem;
+    display:flex;
+    align-items:baseline;
+    gap: 6px;
+  }
+  .logo .d{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size: 1.9rem;
+    color: var(--clay);
+  }
+  .nav-links{
+    display:flex;
+    gap: 32px;
+    list-style:none;
+    margin:0; padding:0;
+    font-size: 0.95rem;
+  }
+  .nav-links a{
+    text-decoration:none;
+    position:relative;
+    padding-bottom: 3px;
+  }
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:0;
+    width:0%;
+    height:2px;
+    background: var(--clay);
+    transition: width .25s ease;
+  }
+  .nav-links a:hover::after{ width:100%; }
+
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:1.5px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 6px 10px;
+    font-family: 'Work Sans', sans-serif;
+    cursor:pointer;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 90px 0 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--clay);
+    display:inline-block;
+    transform: rotate(-2deg);
+    margin-bottom: 6px;
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    line-height: 1.02;
+  }
+  .hero h1 em{
+    font-style: italic;
+    color: var(--clay);
+  }
+  .hero p.lede{
+    max-width: 46ch;
+    margin-top: 22px;
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+  }
+  .hero-ctas{
+    margin-top: 32px;
+    display:flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding: 13px 26px;
+    border-radius: var(--radius);
+    text-decoration:none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1.5px solid var(--ink);
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+  }
+  .btn-solid{
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-solid:hover{ transform: translateY(-2px); background: var(--clay); border-color: var(--clay); }
+  .btn-outline:hover{ transform: translateY(-2px); background: var(--ink); color: var(--paper); }
+
+  .hero-mark{
+    position:relative;
+    aspect-ratio: 4/5;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      repeating-linear-gradient(115deg, rgba(43,38,32,0.05) 0 2px, transparent 2px 14px),
+      var(--paper-dim);
+  }
+  .hero-mark svg{ width: 62%; height: 62%; }
+  .washi{
+    position:absolute;
+    top: -14px; left: 40px;
+    width: 90px; height: 26px;
+    background: var(--gold);
+    opacity: 0.55;
+    transform: rotate(-5deg);
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  .section{ padding: 84px 0; border-top: 1px solid var(--line); }
+  .section-head{
+    display:flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 42px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  }
+  .section-note{
+    font-family:'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--ink-soft);
+    max-width: 30ch;
+  }
+
+  /* ---------- GALLERY / TABS ---------- */
+  .tabs{
+    display:flex;
+    gap: 10px;
+    margin-bottom: 34px;
+    flex-wrap: wrap;
+  }
+  .tab{
+    font-family:'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: 10px 20px 9px;
+    background: var(--paper-dim);
+    border: 1.5px solid var(--ink);
+    border-bottom: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+    cursor: pointer;
+    position: relative;
+    top: 1.5px;
+    color: var(--ink-soft);
+  }
+  .tab[aria-selected="true"]{
+    background: var(--paper);
+    color: var(--ink);
+    border-bottom: 1.5px solid var(--paper);
+  }
+  .tab[data-medium="drawing"][aria-selected="true"]{ box-shadow: inset 0 3px 0 var(--charcoal); }
+  .tab[data-medium="craft"][aria-selected="true"]{ box-shadow: inset 0 3px 0 var(--clay); }
+  .tab[data-medium="painting"][aria-selected="true"]{ box-shadow: inset 0 3px 0 var(--ultramarine); }
+
+  .tab-panel-wrap{
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .gallery-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    padding-top: 34px;
+  }
+  .card{
+    border: 1px solid var(--line);
+    background: var(--paper-dim);
+    border-radius: var(--radius);
+    overflow:hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform: translateY(-4px); box-shadow: 0 12px 24px rgba(43,38,32,0.12); }
+  .card-art{
+    aspect-ratio: 4/3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: rgba(43,38,32,0.32);
+    font-size: 0.8rem;
+    text-align:center;
+    padding: 12px;
+    font-family:'Work Sans';
+  }
+  .medium-drawing .card-art{ background: repeating-linear-gradient(100deg, rgba(74,70,63,0.14) 0 2px, transparent 2px 10px), #E2DCCB; }
+  .medium-craft .card-art{ background: radial-gradient(circle at 30% 30%, rgba(166,73,31,0.18), transparent 60%), #E5DCC9; }
+  .medium-painting .card-art{ background: radial-gradient(circle at 65% 40%, rgba(44,74,124,0.22), transparent 60%), radial-gradient(circle at 25% 70%, rgba(166,73,31,0.14), transparent 55%), #E2E1D6; }
+  .card-info{ padding: 14px 16px 18px; }
+  .card-info h4{ font-family:'Fraunces', serif; font-weight:500; font-size:1.05rem; margin:0 0 3px; }
+  .card-info span{ font-size: 0.82rem; color: var(--ink-soft); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .about-portrait{
+    aspect-ratio: 3/4;
+    border: 1.5px solid var(--ink);
+    background: var(--paper-dim);
+    border-radius: var(--radius);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  .about-body p{ color: var(--ink-soft); margin: 0 0 16px; }
+  .stat-row{
+    display:flex;
+    gap: 34px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .stat b{ display:block; font-family:'Fraunces', serif; font-size:1.6rem; color: var(--clay); }
+  .stat span{ font-size: 0.82rem; color: var(--ink-soft); }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .field{ margin-bottom: 18px; display:flex; flex-direction:column; gap:6px; }
+  label{ font-size: 0.85rem; color: var(--ink-soft); }
+  input, textarea{
+    font-family:'Work Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 11px 13px;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+  }
+  textarea{ resize: vertical; min-height: 110px; }
+  .contact-info h3{ margin-bottom: 14px; }
+  .contact-info a{ text-decoration:none; }
+  .social-row{ display:flex; gap:16px; margin-top: 22px; }
+  .social-row a{
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    text-decoration:none;
+    font-size: 0.85rem;
+  }
+  .social-row a:hover{ background: var(--ink); color: var(--paper); }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 30px 0;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (max-width: 860px){
+    .hero-grid, .about-grid, .contact-grid{ grid-template-columns: 1fr; }
+    .hero{ padding: 60px 0 40px; }
+    .gallery-grid{ grid-template-columns: repeat(2, 1fr); }
+    .nav-links{
+      position:absolute;
+      top: 100%; right: 0; left: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      flex-direction:column;
+      padding: 18px 28px;
+      display:none;
+      gap: 16px;
+    }
+    .nav-links.open{ display:flex; }
+    .nav-toggle{ display:inline-block; }
+    .about-portrait{ order: -1; }
+  }
+  @media (max-width: 560px){
+    .gallery-grid{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo" aria-label="D Art Studio home">
+      <span class="d">D</span><span>Art Studio</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">sketchbook to studio</span>
+      <h1>Drawing, craft &amp; painting, <em>made by hand.</em></h1>
+      <p class="lede">D Art Studio is the working portfolio of an artist who moves between graphite, paint and handmade craft — every piece built from a first pencil line up.</p>
+      <div class="hero-ctas">
+        <a href="#work" class="btn btn-solid">View the work</a>
+        <a href="#contact" class="btn btn-outline">Commission a piece</a>
+      </div>
+    </div>
+    <div class="hero-mark">
+      <div class="washi" aria-hidden="true"></div>
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M30 170 C 50 60, 120 40, 170 90" stroke="#2B2620" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <circle cx="170" cy="90" r="4" fill="#A6491F"/>
+        <path d="M40 150 C 70 130, 90 150, 120 130" stroke="#2C4A7C" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+        <path d="M55 60 L 60 90 L 40 78 Z" fill="#C9A227" opacity="0.65"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <p class="section-note hand">— sorted by medium, swap these cards for your own photos</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Gallery medium">
+      <button class="tab" role="tab" data-medium="drawing" aria-selected="true">Drawing</button>
+      <button class="tab" role="tab" data-medium="craft" aria-selected="false">Craft</button>
+      <button class="tab" role="tab" data-medium="painting" aria-selected="false">Painting</button>
+    </div>
+
+    <div class="tab-panel-wrap">
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap about-grid">
+    <div class="about-portrait">Your portrait photo</div>
+    <div class="about-body">
+      <span class="eyebrow">the artist</span>
+      <h2>About D Art Studio</h2>
+      <p>Replace this paragraph with your own story — where you trained, what draws you to drawing, craft and painting, and what a client can expect when they commission a piece.</p>
+      <p>Mention the mediums you specialise in, your process, and turnaround time for custom work.</p>
+      <div class="stat-row">
+        <div class="stat"><b>150+</b><span>pieces created</span></div>
+        <div class="stat"><b>3</b><span>mediums</span></div>
+        <div class="stat"><b>5 yrs</b><span>practicing</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="eyebrow">get in touch</span>
+      <h2>Commission a piece</h2>
+      <form id="contactForm" style="margin-top:26px;">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Tell me about your idea</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button class="btn btn-solid" type="submit">Send message</button>
+      </form>
+    </div>
+    <div class="contact-info">
+      <h3>Studio details</h3>
+      <p style="color:var(--ink-soft)">Chhatrapati Sambhajinagar, Maharashtra, India</p>
+      <p><a href="mailto:hello@dartstudio.example">hello@dartstudio.example</a></p>
+      <div class="social-row">
+        <a href="#">Instagram</a>
+        <a href="#">Behance</a>
+        <a href="#">Pinterest</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>© <span id="year"></span> D Art Studio. All work handmade.</span>
+    <span class="hand" style="font-size:1.05rem;">made with pencil &amp; patience</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile nav
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // gallery data — replace title/note with real piece names, and swap
+  // the .card-art placeholder divs for <img> tags once you have photos
+  const galleryData = {
+    drawing: [
+      { title: 'Untitled Study I', note: 'graphite on paper' },
+      { title: 'Portrait Sketch', note: 'charcoal, 30×40cm' },
+      { title: 'Line Study', note: 'ink pen' },
+      { title: 'Still Life', note: 'graphite on paper' },
+      { title: 'Figure Study', note: 'charcoal' },
+      { title: 'Botanical Sketch', note: 'ink pen' },
+    ],
+    craft: [
+      { title: 'Handmade Piece I', note: 'mixed media' },
+      { title: 'Clay Form', note: 'ceramic' },
+      { title: 'Textile Work', note: 'fabric, thread' },
+      { title: 'Paper Craft', note: 'quilling' },
+      { title: 'Wood Detail', note: 'carved wood' },
+      { title: 'Assemblage', note: 'mixed media' },
+    ],
+    painting: [
+      { title: 'Landscape I', note: 'acrylic on canvas' },
+      { title: 'Abstract Study', note: 'oil on canvas' },
+      { title: 'Portrait in Blue', note: 'acrylic, 40×50cm' },
+      { title: 'Still Life II', note: 'watercolor' },
+      { title: 'Color Field', note: 'acrylic on canvas' },
+      { title: 'Evening Light', note: 'oil on board' },
+    ],
+  };
+
+  const grid = document.getElementById('galleryGrid');
+  const tabs = document.querySelectorAll('.tab');
+
+  function renderGallery(medium){
+    grid.className = 'gallery-grid medium-' + medium;
+    grid.innerHTML = galleryData[medium].map(item => `
+      <div class="card">
+        <div class="card-art">Add photo:<br>${item.title}</div>
+        <div class="card-info">
+          <h4>${item.title}</h4>
+          <span>${item.note}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+      tab.setAttribute('aria-selected', 'true');
+      renderGallery(tab.dataset.medium);
+    });
+  });
+
+  renderGallery('drawing');
+</script>
+
+</body>
+</html>
